@@ -1,0 +1,437 @@
+<script defer src='/js/admin-page.js'></script>
+
+<div class='admin-container'>
+  <ul class='nav nav-tabs' id='myTab' role='tablist'>
+    <li class='nav-item' role='presentation'>
+      <button
+        class='nav-link active'
+        id='addAnimalButton'
+        data-bs-toggle='tab'
+        data-bs-target='#addAnimal'
+        type='button'
+        role='tab'
+        aria-controls='addAnimal'
+        aria-selected='true'
+      >Добавить животное</button>
+    </li>
+    {{#if admin.isSuperAdmin}}
+      <li class='nav-item' role='presentation'>
+        <button
+          class='nav-link'
+          id='addEmployeeButton'
+          data-bs-toggle='tab'
+          data-bs-target='#addEmployee'
+          type='button'
+          role='tab'
+          aria-controls='addEmployee'
+          aria-selected='false'
+        >Добавить Сотрудника</button>
+      </li>
+    {{/if}}
+    <li class='nav-item' role='presentation'>
+      <button
+        class='nav-link'
+        id='addTariffButton'
+        data-bs-toggle='tab'
+        data-bs-target='#addTariff'
+        type='button'
+        role='tab'
+        aria-controls='addTariff'
+        aria-selected='false'
+      >Добавить тариф</button>
+    </li>
+    <li class='nav-item' role='presentation'>
+      <button
+        class='nav-link'
+        id='addNewsButton'
+        data-bs-toggle='tab'
+        data-bs-target='#addNews'
+        type='button'
+        role='tab'
+        aria-controls='addNews'
+        aria-selected='false'
+      >Добавить новость</button>
+    </li>
+    <li class='nav-item' role='presentation'>
+      <button
+        class='nav-link'
+        id='editScheduleButton'
+        data-bs-toggle='tab'
+        data-bs-target='#editSchedule'
+        type='button'
+        role='tab'
+        aria-controls='editSchedule'
+        aria-selected='false'
+      >Редактировать график работы</button>
+    </li>
+    <li class='nav-item' role='presentation'>
+      <button
+        class='nav-link'
+        id='settings-tab'
+        data-bs-toggle='tab'
+        data-bs-target='#settings'
+        type='button'
+        role='tab'
+        aria-controls='settings'
+        aria-selected='false'
+      >Редактировать staff</button>
+    </li>
+    <li class='nav-item' role='presentation'>
+      <button
+        class='nav-link'
+        id='settings-tab'
+        data-bs-toggle='tab'
+        data-bs-target='#settings'
+        type='button'
+        role='tab'
+        aria-controls='settings'
+        aria-selected='false'
+      >Выйти</button>
+    </li>
+  </ul>
+
+  <div class='tab-content' id='myTabContent'>
+    <div
+      class='tab-pane fade show active'
+      id='addAnimal'
+      role='tabpanel'
+      aria-labelledby='add-animal'
+    >
+      <div class='bg-dark'>
+        <form name='addAnimalForm' enctype='multipart/form-data'>
+          <div class='mb-3'>
+            <input
+              type='hidden'
+              name='dataType'
+              class='form-control'
+              value='animals'
+            />
+          </div>
+
+          <div class='mb-3'>
+            <label class='form-label'>Категория</label>
+            <select
+              name='categoryId'
+              class='form-select'
+              aria-label='Default select example'
+            >
+              <option selected disabled>Выберите категорию</option>
+              {{#each categories}}
+                <option value='{{this.id}}'>{{this.title}}</option>
+              {{/each}}
+            </select>
+          </div>
+
+          <div class='mb-3'>
+            <label class='form-label'>Название животного</label>
+            <input
+              type='text'
+              name='name'
+              class='form-control'
+              aria-describedby='emailHelp'
+            />
+          </div>
+
+          <div class='mb-3'>
+            <label class='form-label'>Описание</label>
+
+            <div class='form-floating'>
+              <textarea
+                name='description'
+                class='form-control'
+                placeholder='Leave a comment here'
+                id='animalDescription'
+              ></textarea>
+            </div>
+          </div>
+
+          <div class='mb-3'>
+            <label class='form-label'>Фото</label>
+            <input type='file' name='image' class='form-control' />
+          </div>
+
+          <button type='submit' class='btn btn-primary'>Submit</button>
+
+        </form>
+      </div>
+    </div>
+
+    <div
+      class='tab-pane fade'
+      id='addEmployee'
+      role='tabpanel'
+      aria-labelledby='add-employee'
+    >
+      <div class='bg-dark'>
+        <form name='addEmployeeForm'>
+          <div class='mb-3'>
+            <label class='form-label'>Имя</label>
+            <input
+              type='text'
+              name='firstName'
+              class='form-control'
+              aria-describedby='firstNameHelp'
+            />
+          </div>
+
+          <div class='mb-3'>
+            <label class='form-label'>Фамилия</label>
+            <input
+              type='text'
+              name='lastName'
+              class='form-control'
+              aria-describedby='lastNameHelp'
+            />
+          </div>
+
+          <div class='mb-3'>
+            <label class='form-label'>Email</label>
+            <input
+              type='email'
+              name='email'
+              class='form-control'
+              aria-describedby='emailHelp'
+            />
+          </div>
+
+          <div class='mb-3'>
+            <label class='form-label'>Пароль</label>
+            <input
+              type='password'
+              name='password'
+              class='form-control'
+              aria-describedby='passwordHelp'
+            />
+          </div>
+
+          <div class='mb-3 form-check'>
+            <input
+              type='checkbox'
+              id='isSuperAdmin'
+              name='isSuperAdmin'
+              value='true'
+              class='form-check-input'
+            />
+            <label class='form-check-label' for='isSuperAdmin'>
+              Сделать главным администратором
+            </label>
+          </div>
+
+          <button type='submit' class='btn btn-primary'>Создать учетную запись</button>
+
+        </form>
+      </div>
+    </div>
+
+    <div
+      class='tab-pane fade'
+      id='addTariff'
+      role='tabpanel'
+      aria-labelledby='add-tariff'
+    >
+      <div class='bg-dark'>
+        <form name='addTariffForm'>
+          <div class='mb-3'>
+            <input
+              type='hidden'
+              name='dataType'
+              class='form-control'
+              value='tariffs'
+            />
+          </div>
+
+          <div class='mb-3'>
+            <label class='form-label'>Название тарифа</label>
+            <input
+              type='text'
+              name='title'
+              class='form-control'
+              aria-describedby='emailHelp'
+            />
+          </div>
+
+          <div class='mb-3'>
+            <label class='form-label'>Описание</label>
+
+            <div class='form-floating'>
+              <textarea
+                name='description'
+                class='form-control'
+                placeholder='Leave a comment here'
+                id='tariffDescription'
+              ></textarea>
+            </div>
+          </div>
+
+          <div class='mb-3'>
+            <label class='form-label'>Условия</label>
+
+            <div class='form-floating'>
+              <textarea
+                name='condition'
+                class='form-control'
+                placeholder='Leave a comment here'
+                id='condition'
+              ></textarea>
+            </div>
+          </div>
+
+          <div class='mb-3'>
+            <label class='form-label'>Цена</label>
+
+            <input type='number' name='price' class='form-control' />
+          </div>
+
+          <div class='mb-3'>
+            <label class='form-label'>Изображение для тарифа</label>
+            <input type='file' name='image' class='form-control' />
+          </div>
+
+          <button type='submit' class='btn btn-primary'>Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <div
+      class='tab-pane fade'
+      id='addNews'
+      role='tabpanel'
+      aria-labelledby='add-news'
+    >
+      <div class='bg-dark'>
+        <form name='addNewsForm'>
+          <div class='mb-3'>
+            <input
+              type='hidden'
+              name='dataType'
+              class='form-control'
+              value='news'
+            />
+          </div>
+
+          <div class='mb-3'>
+            <label class='form-label'>Заголовок</label>
+            <input
+              type='text'
+              name='title'
+              class='form-control'
+              aria-describedby='newsHelp'
+            />
+          </div>
+
+          <div class='mb-3'>
+            <label class='form-label'>Описание</label>
+
+            <div class='form-floating'>
+              <textarea
+                name='content'
+                class='form-control'
+                placeholder='Leave a comment here'
+                id='newsDescription'
+              ></textarea>
+            </div>
+          </div>
+
+          <div class='mb-3'>
+            <label class='form-label'>Фото</label>
+            <input type='file' name='image' class='form-control' />
+          </div>
+
+          <button type='submit' class='btn btn-primary'>Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <div
+      class='tab-pane fade'
+      id='editSchedule'
+      role='tabpanel'
+      aria-labelledby='add-news'
+    >
+      <div class='bg-dark'>
+        <form name='editScheduleForm'>
+          <div class='mb-5'>
+            <label class='form-label'>Будни</label>
+            <div class='d-flex justify-content-around'>
+              <div>
+                <label class='d-inline-block form-label pr-3'>Открытие</label>
+                <input
+                  type='text'
+                  name='weekdaysOpening'
+                  class='d-inline-block form-control pr-3'
+                  aria-describedby='newsHelp'
+                  style='width:150px'
+                />
+              </div>
+
+              <div>
+                <label class='d-inline-block form-label'>Закрытие</label>
+                <input
+                  type='text'
+                  name='weekdaysClosing'
+                  class='d-inline-block form-control'
+                  aria-describedby='newsHelp'
+                  style='width:150px'
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class='mb-3'>
+            <label class='form-label'>Выходные</label>
+            <div class='d-flex justify-content-around'>
+              <div>
+                <label class='d-inline-block form-label'>Открытие</label>
+                <input
+                  type='text'
+                  name='weekendOpening'
+                  class='d-inline-block form-control'
+                  aria-describedby='newsHelp'
+                  style='width:150px'
+                />
+              </div>
+
+              <div>
+                <label class='form-label'>Закрытие</label>
+                <input
+                  type='text'
+                  name='weekendClosing'
+                  class='d-inline-block form-control'
+                  aria-describedby='newsHelp'
+                  style='width:150px'
+                />
+              </div>
+            </div>
+
+          </div>
+
+          <button type='submit' class='btn btn-primary'>Редактировать</button>
+        </form>
+      </div>
+    </div>
+
+    <div
+      class='tab-pane'
+      id='settings'
+      role='tabpanel'
+      aria-labelledby='settings-tab'
+    >
+    <div class="inner__container">
+      {{#each admins}} 
+      {{>staffCard}}
+      {{/each}}
+    </div>
+
+    </div>
+
+    <div
+      class='tab-pane'
+      id='settings'
+      role='tabpanel'
+      aria-labelledby='settings-tab'
+    >
+      <p>Вы уверены что хотите выйти?</p>
+      <a href='/admins/logout' class='btn btn-primary'>Выйти</a>
+    </div>
+  </div>
+</div>

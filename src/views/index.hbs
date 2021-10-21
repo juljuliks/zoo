@@ -1,0 +1,88 @@
+<div class="intro">
+  <div class="intro__inner">
+    <h2 class="intro__title">Название</h2>
+    <div class="intro__info">
+      <p>г.Москва ул.Зоопарковая 5</p>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit sequi natus laboriosam aperiam itaque laborum.
+        Veritatis
+        vero, autem dolore maiores voluptatem distinctio, neque deserunt</p>
+      <ul class="intro__schedule schedule">Режим работы
+        <li class="schedule__days">
+          <span class="schedule__day">Будни</span>
+
+          <span class="schedule__day-opening">
+            {{schedule.weekdaysOpening}}
+          </span> - <span class="schedule__day-closing">
+            {{schedule.weekdaysClosing}}
+          </span>
+        </li>
+        <li class="schedule__days">
+          <span class="schedule__day schedule__day_weekend">Выходные</span>
+
+          <span class="schedule__day-opening">
+            {{schedule.weekendOpening}}
+          </span> - <span class="schedule__day-closing">
+            {{schedule.weekendClosing}}
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="news">
+  <div class="px-5 inner__container">
+    <h2 class="inner__container-title">Новости</h2>
+        {{!-- Each card ... --}}
+        {{#each news}}
+          {{> newsCard}} 
+        {{/each}}
+        <div class="text-right d-block">
+          <a href="/news" class="link-warning">Смотреть все новости зоопарка</a>
+        </div>
+  </div>
+</div>
+
+<div class="galery">
+  <div class="inner__container--wide">
+    <h2 class="inner__container-title text-center">Наши Животные</h2>
+    <div class="galery-wrapper">
+      {{#each images}}
+        {{> galeryCard}}
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+<div id="tariffs">
+  <div class="px-5 inner__container">
+    <h2 class="inner__container-title">Taрифы</h2>
+    <div class="d-flex flex-wrap">
+      {{!-- Each card ... --}}
+      {{#each tariffs}}
+      {{> tariffsCard}}
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+<div id="contacts">
+  <div class="px-5 inner__container--wide">
+    <h2 class="inner__container-title">Контакты</h2>
+    <div class="contacts__inner">
+      <div class="map">
+        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A18d6f5366f4bf37ec218ac2183efa18dc9c7f1c38b1812a717e2415456eb5982&amp;source=constructor" width="400" height="400" frameborder="0"></iframe>
+      </div>
+      <div class="contacts__inner-info">
+        <div class="info">
+          <p><a href="https://yandex.ru/maps/213/moscow/?ll=37.578525%2C55.761248&mode=poi&poi%5Bpoint%5D=37.578525%2C55.761248&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D1110600521&z=17.97">г.Москва, ул.Зоопарковая 5</a></p> 
+          <p><a href="tel:+74951234567" target="_blank">+7 (495) 123-45-67</a></p>
+          <p><a href="tel:7495123456">12-23-45</a></p>
+          <p><a href="mailto:ask@htmlbook.ru">Задавайте вопросы по электронной почте</a></p> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

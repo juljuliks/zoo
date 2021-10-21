@@ -1,0 +1,131 @@
+<script defer src="/js/animal-page.js"></script>
+
+<div class="animal">
+  <div class="px-5 inner__container">
+    <div class="card mb-3" style="max-width: 50rem;">
+      <div class="row g-0">
+        <div class="col-md-4 animalCard-img">
+          <img src={{animal.image}} class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 id="cardTitle" class="card-title">{{animal.name}}</h5>
+            <p id="cardClass" class="card-text">Класс: {{animal.category}}</p>
+            <p id="cardDescr" class="card-text">{{animal.description}}</p>
+          </div>
+          {{#if admin}} 
+              <div class="d-flex flex-wrap">
+                <button type="button" class="mx-2 btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editAnimalForm">
+                    Редактировать
+                </button>
+                <button type="button" class="mx-2 btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#deleteAnimalForm">
+                    Удалить
+                </button>
+                <button type="button" class="mx-2 btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addPhotoForm">
+                    Добавить фото в галерею
+                </button>
+                
+              </div>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editAnimalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Редактировать</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/categories/{{animal.categoryId}}/animals/{{animal.id}}" method="PUT" class="m-2 editAnimalForm">
+                <div class="mb-3">
+                  <label class="form-label">Название</label>
+                  <input value="{{animal.name}}" name="name" type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <textarea name="description" id="descr" cols="35" rows="2">{{animal.description}}</textarea>
+                </div>
+                <input name="dataType" type="hidden" class="form-control" value='animals'>
+                <input name="animalId" type="hidden" class="form-control" value={{animal.id}}>
+                <div class="mb-3">
+                  <label class="form-label">Фото карточки</label>
+                  <input id="image" name="image" type="file" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-secondary">Подтвердить</button>
+                </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteAnimalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Удалить</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/categories/{{animal.categoryId}}/animals/{{animal.id}}" class="m-2 deleteAnimalForm">
+                  <p>Вы уверены что хотите удалить карточку: {{animal.name}}</p>
+                  <button type="submit" class="btn btn-secondary">Подтвердить</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addPhotoForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Добавить фото в галерею</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/categories/{{animal.categoryId}}/animals/{{animal.id}}/photos" class="m-2 addPhotoForm">
+                  <input type='hidden' name='dataType' class='form-control' value='animals'>
+                  <input name="animalId" type="hidden" class="form-control" value={{animal.id}}>
+                  <div class="mb-3">
+                    <label class="form-label">Фото карточки</label>
+                    <input id="image" required name="image" type="file" class="form-control">
+                  </div>
+                  <button type="submit" class="btn btn-secondary">Подтвердить</button>
+                </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{#if animalPhotos}}
+<div class="animal_carousel">
+    <h2 class="inner__container-title">Галерея</h2>
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        {{#each animalPhotos}}
+        {{#if active}} 
+        <div class="carousel-item active">
+          <img src={{photoUrl}} class="d-block w-100" alt="...">
+        </div>
+        {{else}} 
+        <div class="carousel-item">
+          <img src={{photoUrl}} class="d-block w-100" alt="...">
+        </div>
+        {{/if}}
+        {{/each}}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+</div>
+{{/if}}

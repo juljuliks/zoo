@@ -1,0 +1,77 @@
+<div class="card mx-3 mb-3 border-0 rounded-3 overflow-hidden" style="width: 13rem;">
+  <div class="card-body p-0">
+    <div class="tariffs-img">
+      <img src="{{image}}" alt="">
+    </div>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" style="height: 2,5rem;"><h5>{{title}}</h5></li>
+    <li class="list-group-item" style="height: 4rem;">{{description}}</li>
+    <li class="list-group-item" style="height: 6rem;">{{condition}}</li>
+    <li class="list-group-item" style="height: 3rem;" >
+      <h4 style="height: 2rem;">{{price}} &#8381 </h4>
+    </li>
+    <li class="list-group-item d-flex flex-column justify-content-center" style="height: 6rem;" >
+        <button type="button" class="m-1 p-1 btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editTariffModal-{{id}}">
+          Редактировать
+        </button>
+        <button type="button" class="m-1 p-1 btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#deleteTariffModal-{{id}}">
+          Удалить
+        </button>
+    </li>
+  </ul>
+</div>
+
+<div class="modal fade" id="editTariffModal-{{id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Редактировать тариф</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="editTariff" action="/tariffs/{{id}}">
+          <input type='hidden' name='dataType' class='form-control' value='tariffs'>
+          <div class="mb-3">
+            <label class="form-label">Название</label>
+            <input name="title" class="form-control" value="{{title}}">
+          </div>
+      <div class="mb-3">
+        <label class="form-label">Описание</label>
+        <input name="description" class="form-control" value="{{description}}">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Условия</label>
+        <input name="condition" class="form-control" value="{{condition}}">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Цена</label>
+        <input name="price" type="number" class="form-control" value="{{price}}">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Фото карточки</label>
+        <input name="image" type="file" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-secondary">Подтвердить</button>
+  </form>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<div class="modal fade" id="deleteTariffModal-{{id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Редактировать тариф</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/tariffs/{{id}}" class="deleteTariff" class="d-flex flex-column justify-content-center">
+          <div>Вы уверены что хотите удалить тариф: {{title}}</div>
+          <button type="submit" class="btn btn-secondary">Подтвердить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> 
