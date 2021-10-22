@@ -4,7 +4,7 @@
   "description": "zoo project",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "npm i && npm sequelize-cli db:migrate && npm sequelize-cli db:seed:all && node server.js",
     "dev": "nodemon server.js --ignore ./sessions/"
   },
   "repository": {
