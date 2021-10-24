@@ -88,14 +88,14 @@
       </div>
       <div class="modal-body">
         <form action="/categories/{{animal.categoryId}}/animals/{{animal.id}}/photos" class="m-2 addPhotoForm">
-                  <input type='hidden' name='dataType' class='form-control' value='animals'>
-                  <input name="animalId" type="hidden" class="form-control" value={{animal.id}}>
-                  <div class="mb-3">
-                    <label class="form-label">Фото карточки</label>
-                    <input id="image" required name="image" type="file" class="form-control">
-                  </div>
-                  <button type="submit" class="btn btn-secondary">Подтвердить</button>
-                </form>
+          <input type='hidden' name='dataType' class='form-control' value='animals'>
+          <input name="animalId" type="hidden" class="form-control" value={{animal.id}}>
+            <div class="mb-3">
+              <label class="form-label">Фото</label>
+              <input id="image" required name="image" type="file" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-secondary">Подтвердить</button>
+         </form>
       </div>
     </div>
   </div>
